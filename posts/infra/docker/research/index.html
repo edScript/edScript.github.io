@@ -229,7 +229,7 @@ Esta página contém...
 <h1 id=docker>Docker&mldr;</h1>
 <p>Atualmente o Docker está no <strong>hype</strong> uns dizem que é pelos micro-serviços outros pelos recursos. Como não conhecia a tecnologia decidi por as mãos na massa e estudar um bocadinho de como a tecnologia funciona e o porquê de estar no hype. Acredito que no final deste artigo fiques com umas luzes para que serve o Docker.</p>
 <h2 id=um-bocadinho-de-história->Um bocadinho de história 👴</h2>
-<p>Para perceber o motivo da existência do Docker vamos começar por contar um pouco da história.</p>
+<p>Para perceber o motivo da existência do Docker vamos começar por contar um pouco da história dos servidores e como as aplicações eram executadas nos mesmos.</p>
 <p>Hoje em dia é quase impossível distinguir o negócio e a aplicação que o &ldquo;alimenta&rdquo;.</p>
 <blockquote>
 <p>No apllications, no businesses</p>
@@ -273,13 +273,12 @@ Com a virtualização (<em>hypervisor</em>) podiamos rodar múltiplas aplicaçõ
 <p>Os containers interagem diretamenete com o Sistema Operativo do servidor, não existindo uma abstração do kernel como numa VM.</p>
 <p><img src=/images/infra/docker/containers.png alt="Gasto de recursos com containers"></p>
 <h4 id=diferenças-entre-vms>Diferenças entre VMs</h4>
-<p><strong>Hypervisors</strong> virtualizam hardware (CPUs, RAM, networks&mldr;).<br>
-<strong>Containers</strong> virtualizam o sistema operativo (cada um tem o seu processo, root file system, eth0&mldr;)</p>
+<p><strong>Hypervisors</strong> virtualizam hardware (CPUs, RAM, networks&mldr;) enquanto os <strong>containers</strong> virtualizam o sistema operativo (cada um tem o seu processo, root file system, eth0&mldr;)</p>
 <p>Cada <strong>VM</strong> num servidor partilha o mesmo hardware, cada <strong>container</strong> partilha o mesmo kernel do S.O e porque existe apenas um kernel os containers são mais pequenos, rápidos e mais &ldquo;leves&rdquo; que VMs.</p>
 <p><img src=/images/infra/docker/vms_and_containers.png alt="Diferenças entre VMs e containers"></p>
 <h4 id=funcionamento>Funcionamento</h4>
 <p>O desenvolvimento durante muitos anos seguia o ditado &ldquo;cada um faz da sua maneira&rdquo;, o Docker fornece uma maneira consistente de &ldquo;entregar&rdquo; o código em diferentes ambientes.<br>
-Através de uma <code>image</code> que é utilizado para construír um <strong>container</strong> e apenas de <em>read-only</em>, contém os ficheiros necesários (Sistema Operativo com o código da aplicação e o runtime para correr a aplicação), resumindo é um blueprint para correr um container.</p>
+Através de uma <code>image</code> que é utilizado para construír um <strong>container</strong> e apenas de leitura (<em>read-only</em>), contém os ficheiros necesários (Sistema Operativo com o código da aplicação e o runtime para correr a aplicação), resumindo é um blueprint para correr um container.</p>
 <p>O <code>container</code> é criada através de uma <strong>image</strong> com uma camada que permite escrever (<em>write</em>) dados. O motivo dos containers terem um tempo de inicialização tão curto é porque terem apenas esta camada de escrita, pois a <code>image</code> é que contém o software a correr.</p>
 <p>O funcionamento está ser explicado de uma maneira muito abstrata e pode estar confusa. (<em>Futuramente irei escrever um artigo que explica as camadas, mas ainda estou a fundamentar o estudo</em> 👩‍🎓)</p>
 <h5 id=benefícios>Benefícios</h5>
